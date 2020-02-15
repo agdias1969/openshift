@@ -1,0 +1,27 @@
+[OSEv3:children]
+masters
+nodes
+etcd
+
+[OSEv3:vars]
+ansible_ssh_user=okd
+ansible_become=yes
+
+openshift_deployment_type=origin
+openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider'}]
+#openshift_console_install=true
+openshift_cluster_monitoring_operator_install=false
+
+os_firewall_use_firewalld=true
+[masters]
+ocp-1.hallo.io
+
+[etcd]
+ocp-1.hallo.io
+
+[nodes]
+ocp-1.hallo.io openshift_node_group_name='node-config-master'
+ocp-2.hallo.io openshift_node_group_name='node-config-compute'
+
+
+
